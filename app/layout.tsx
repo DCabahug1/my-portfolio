@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} antialiased relative font-sans`}
+        className={`${poppins.variable} bg-background text-foreground antialiased relative font-sans overflow-y-auto transition-all duration-300`}
       >
         <script
           src="https://kit.fontawesome.com/43f035c78d.js"
