@@ -3,10 +3,22 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useEffect } from 'react'
 
 function Profile() {
     const [imageLoaded, setImageLoaded] = useState(false)
-    const element = document.querySelector('#about-mobile');
+    const [mounted, setMounted] = useState(false)
+    
+    useEffect(() => {
+      setMounted(true)
+    }, [])
+    
+    const handleImageClick = () => {
+      if (mounted) {
+        const element = document.querySelector('#about-mobile');
+        if (element) element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
   
   return (
     <div className='flex flex-col items-center justify-center gap-2'>
@@ -20,7 +32,7 @@ function Profile() {
           width={200} 
           height={200} 
           className={`xl:w-64 xl:h-64 rounded-full border-8 border-primary hover:shadow-[0_0_30px_0_#000] hover:shadow-primary/50 cursor-pointer transition-all duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onClick={() => {if (element) element.scrollIntoView({ behavior: 'smooth' })}} 
+          onClick={handleImageClick} 
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageLoaded(false)}
         />

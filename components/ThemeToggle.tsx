@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 
 function ThemeToggle() {
-  const { theme, systemTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function ThemeToggle() {
 
   return (
     <div>
-      <Button variant="outline" size="icon" className="" onClick={toggleTheme}>
+      <Button variant="outline" size="icon" className="cursor-pointer" onClick={toggleTheme}>
         {theme === "dark" ? (
           <i className="fa-solid fa-moon"></i>
         ) : (

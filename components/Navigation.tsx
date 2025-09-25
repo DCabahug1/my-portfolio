@@ -92,7 +92,11 @@ function NavBar() {
             </SheetHeader>
             <div className="flex flex-col space-y-4 mt-6">
               {buttons.map((button, index) => (
-                <SheetClose asChild key={`mobile-${index}`} className="hover:bg-accent">
+                <SheetClose
+                  asChild
+                  key={`mobile-${index}`}
+                  className="hover:bg-accent"
+                >
                   <button
                     onClick={() => handleScroll(button.href)}
                     className="text-left px-4 py-2 hover:text-primary transition-colors"
