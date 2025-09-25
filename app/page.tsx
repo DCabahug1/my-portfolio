@@ -10,8 +10,8 @@ function page() {
   return (
     <div className='flex flex-col items-center font-sans'>
       <Home />
-      <Contact />
       <Projects />
+      <Contact />
     </div>
   )
 }
