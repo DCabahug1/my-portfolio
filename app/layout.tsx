@@ -13,6 +13,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Duane Cabahug",
   description: "",
+  
 };
 
 export default function RootLayout({
