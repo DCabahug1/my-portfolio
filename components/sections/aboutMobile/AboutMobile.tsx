@@ -5,7 +5,7 @@ import About from '../home/About'
 
 function AboutMobile() {
   return (
-    <div className='xl:hidden p-8'>
+    <div id="about-mobile" className='xl:hidden p-8'>
       <About />
     </div>
   )
