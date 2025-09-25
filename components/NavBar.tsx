@@ -11,6 +11,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import React from "react";
+import ThemeToggle from "./ThemeToggle";
 
 function NavBar() {
   const buttons = [
@@ -48,7 +49,7 @@ function NavBar() {
   };
 
   return (
-    <div className="fixed top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b">
+    <div className="fixed flex items-center justify-between top-0 z-50 w-full p-4">
       {/* Desktop */}
       <div className="hidden md:flex">
         <NavigationMenu>
@@ -56,10 +57,10 @@ function NavBar() {
             {buttons.map((button, index) => {
               return (
                 <NavigationMenuItem
-                  className="cursor-pointer"
                   key={`button-${index}`}
                 >
-                  <NavigationMenuLink asChild>
+                  <NavigationMenuLink 
+                  className="cursor-pointer" asChild>
                     <button onClick={() => handleScroll(button.href)}>
                       {button.name}
                     </button>
@@ -72,16 +73,9 @@ function NavBar() {
       </div>
       {/* Mobile */}
       <div className="flex md:hidden p-4">
-        {buttons.map((button, index) => (
-          <button
-            key={`mobile-${index}`}
-            onClick={() => handleScroll(button.href)}
-            className="px-4 py-2 hover:text-primary transition-colors"
-          >
-            {button.name}
-          </button>
-        ))}
+      
       </div>
+      <ThemeToggle />
     </div>
   );
 }
