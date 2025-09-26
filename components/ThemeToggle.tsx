@@ -5,11 +5,17 @@ import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, systemTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+
+    if (systemTheme === 'dark') {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
   }, [])
 
   const toggleTheme = () => {
