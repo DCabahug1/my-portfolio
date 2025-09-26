@@ -2,7 +2,7 @@ export const projectsList = [
   {
     imgURL: "/images/ChatLink.png",
     title: "ChatLink",
-    description: "Real-time messaging app with Firebase backend",
+    description: "Real-time chat app with Firebase",
     tags: ["React JS", "Firebase", "Tailwind", "Netlify"],
     link: "https://dcabahug1-chatlinkv2.netlify.app/"
   },
@@ -10,7 +10,7 @@ export const projectsList = [
     imgURL: "/images/Weatherly.png",
     title: "Weatherly",
     description: "Weather forecast app with location services",
-    tags: ["React JS", "Tailwind", "OneCall API", "Geocoding API", "Vercel"],
+    tags: ["React JS", "Tailwind", "Weather API", "Vercel"],
     link: 'https://dc-weatherly.vercel.app/'
   },
   {
