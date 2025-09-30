@@ -1,9 +1,7 @@
-# Next.js Template
+# 🌐 Duane Cabahug — Portfolio
 
-## Getting Started
+[![Vercel Status](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://duane-cabahug.vercel.app/)  
 
-1. Install dependencies: `npm install`
-2. Run development server: `npm run dev or pnpm run dev`
-3. Open [http://localhost:3000](http://localhost:3000)
+Welcome to my personal developer portfolio. This site highlights my projects, skills, and experience as a full-stack developer.
 
-
+🔗 **Live Site:** [duane-cabahug.vercel.app](https://duane-cabahug.vercel.app/)
