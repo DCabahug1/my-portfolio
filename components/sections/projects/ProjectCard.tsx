@@ -21,7 +21,7 @@ function ProjectCard({
   imgURL: string;
   title: string;
   description: string;
-  tags: string[];
+  tags: {title: string, priority: string}[];
   link: string;
 }) {
   const checkCharsInTags = () => {
@@ -29,7 +29,7 @@ function ProjectCard({
 
     let totalChars = 0;
     tags.forEach((tag) => {
-      totalChars += tag.length;
+      totalChars += tag.title.length;
     });
     return totalChars;
   };
@@ -80,14 +80,14 @@ function ProjectCard({
                   }}
                 >
                   {tags.map((tag, index) => (
-                    <Badge key={"tag-" + index} className="shrink-0">
-                      {tag}
+                    <Badge key={"tag-" + index} className="shrink-0" variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>
+                      {tag.title}
                     </Badge>
                   ))}
                   {(tags.length > 3 || checkCharsInTags() > 20) &&
                     tags.map((tag, index) => (
-                      <Badge key={"tag-" + index} className="shrink-0">
-                        {tag}
+                      <Badge key={"tag-" + index} className="shrink-0" variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>
+                        {tag.title}
                       </Badge>
                     ))}
                 </div>
@@ -96,7 +96,7 @@ function ProjectCard({
 
               <div className="hidden lg:flex w-full h-min gap-2 p-2 flex-wrap justify-start">
                 {tags.map((tag, index) => (
-                  <Badge key={"tag-" + index}>{tag}</Badge>
+                  <Badge key={"tag-" + index} variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>{tag.title}</Badge>
                 ))}
               </div>
             </div>
