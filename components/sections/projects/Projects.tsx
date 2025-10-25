@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ProjectCard from "./ProjectCard";
-import { projectsList } from "@/lib/data/projects/projects";
+import { projectsList } from "@/lib/data/projects";
 
 function Projects() {
   return (

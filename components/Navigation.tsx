@@ -30,6 +30,10 @@ function NavBar() {
       href: "home",
     },
     {
+      name: "Experience",
+      href: "experience",
+    },
+    {
       name: "Projects",
       href: "projects",
     },
@@ -37,6 +41,7 @@ function NavBar() {
       name: "Contact",
       href: "contact",
     },
+
   ];
 
   const handleScroll = (href: string) => {
