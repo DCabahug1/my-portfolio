@@ -21,7 +21,7 @@ function ProjectCard({
   imgURL: string;
   title: string;
   description: string;
-  tags: {title: string, priority: string}[];
+  tags: {title: string, priority: string, background: string, foreground: string}[];
   link: string;
 }) {
   const checkCharsInTags = () => {
@@ -34,6 +34,8 @@ function ProjectCard({
     return totalChars;
   };
 
+  console.log(tags);
+  
   return (
     <div className="p-1">
       <Card
@@ -55,6 +57,7 @@ function ProjectCard({
               <span className="text-muted-foreground text-sm">No Image</span>
             </div>
           )}
+
 
           <div className="flex flex-col h-full max-h-[50%] w-full items-center justify-between p-4 gap-2">
             <div className="flex flex-col items-center gap-2">
@@ -80,13 +83,31 @@ function ProjectCard({
                   }}
                 >
                   {tags.map((tag, index) => (
-                    <Badge key={"tag-" + index} className="shrink-0" variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>
+                    <Badge 
+                      key={"tag-" + index} 
+                      className="shrink-0" 
+                      style={{ 
+                        backgroundColor: tag.background, 
+                        color: tag.foreground,
+                        
+                      }}
+                      
+                    >
                       {tag.title}
                     </Badge>
                   ))}
                   {(tags.length > 3 || checkCharsInTags() > 20) &&
                     tags.map((tag, index) => (
-                      <Badge key={"tag-" + index} className="shrink-0" variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>
+                      <Badge 
+                        key={"tag-duplicate-" + index} 
+                        className="shrink-0" 
+                        style={{ 
+                          backgroundColor: tag.background, 
+                          color: tag.foreground,
+                          
+                        }}
+                        
+                      >
                         {tag.title}
                       </Badge>
                     ))}
@@ -96,7 +117,18 @@ function ProjectCard({
 
               <div className="hidden lg:flex w-full h-min gap-2 p-2 flex-wrap justify-start">
                 {tags.map((tag, index) => (
-                  <Badge key={"tag-" + index} variant={tag.priority == 'high' ? 'default' : tag.priority == 'medium' ? 'outline' : 'secondary'}>{tag.title}</Badge>
+                  <Badge 
+                    key={"tag-lg-" + index} 
+                    className="shrink-0" 
+                    style={{ 
+                      backgroundColor: tag.background, 
+                      color: tag.foreground,
+                      
+                    }}
+                    
+                  >
+                    {tag.title}
+                  </Badge>
                 ))}
               </div>
             </div>
