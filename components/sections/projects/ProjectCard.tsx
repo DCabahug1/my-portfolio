@@ -81,7 +81,7 @@ function ProjectCard({
             <p className="flex flex-1 text-center items-center w-full">{description}</p>
             {/* Marquee container for small/medium screens */}
             
-            <Marquee className="rounded-full p-1 md:hidden overflow-hidden">
+            <Marquee className="rounded-full p-1 overflow-hidden">
               <MarqueeContent
                 speed={20}
                 autoFill={true}
@@ -107,22 +107,6 @@ function ProjectCard({
               </MarqueeContent>
             </Marquee>
 
-            {/* Wrapped container for large screens */}
-
-            <div className="hidden md:flex w-full gap-2 p-2 flex-wrap justify-start ">
-              {tags.map((tag, index) => (
-                <Badge
-                  key={"tag-lg-" + index}
-                  className="shrink-0"
-                  style={{
-                    backgroundColor: tag.background,
-                    color: tag.foreground,
-                  }}
-                >
-                  {tag.title}
-                </Badge>
-              ))}
-            </div>
           </div>
         </CardContent>
       </Card>

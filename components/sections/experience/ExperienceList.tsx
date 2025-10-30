@@ -18,12 +18,15 @@ function ExperienceList() {
       className="flex flex-col items-center justify-center h-min w-full p-8 gap-4"
     >
       <h2 className="text-3xl font-bold">Experience</h2>
-      <Card className="w-full max-w-xl p-0">
+      <Card className="w-full max-w-xl p-0 overflow-hidden">
         <Accordion type="single" collapsible className="">
           {experienceList.map((experience, index) => (
             <AccordionItem key={"experience_" + index} value={index.toString()}>
-              <AccordionTrigger className="px-6">
-                {experience.title}
+              <AccordionTrigger className="px-6 !no-underline cursor-pointer rounded-none">
+                <div className="flex flex-col gap-2">
+                  <h2 className="font-bold">{experience.location}</h2>
+                  <p className="text-muted-foreground font-thin">{experience.title}</p>
+                </div>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col items-center gap-6 px-6">
                 {experience.imgSrc && (
