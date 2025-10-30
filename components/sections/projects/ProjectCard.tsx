@@ -7,9 +7,17 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Marquee,
+  MarqueeContent,
+  MarqueeFade,
+  MarqueeItem,
+} from "@/components/ui/shadcn-io/marquee";
+import { useEffect, useState } from "react";
 
 function ProjectCard({
   imgURL,
@@ -21,116 +29,99 @@ function ProjectCard({
   imgURL: string;
   title: string;
   description: string;
-  tags: {title: string, priority: string, background: string, foreground: string}[];
+  tags: {
+    title: string;
+    priority: string;
+    background: string;
+    foreground: string;
+  }[];
   link: string;
 }) {
-  const checkCharsInTags = () => {
-    // return total characters in all tags
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const checkCharsInTags = () => {
     let totalChars = 0;
+
     tags.forEach((tag) => {
       totalChars += tag.title.length;
     });
+
     return totalChars;
   };
 
-  console.log(tags);
-  
+  // console.log(tags);
+
   return (
-    <div className="p-1">
+    <div className="p-1 w-full h-full">
       <Card
-        className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200"
+        className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col"
         onClick={() => window.open(link, "_blank")}
       >
-        <CardContent className="flex flex-col aspect-3/4 items-center p-0 h-full w-full">
+        <CardContent className="flex flex-col items-center p-0 w-full flex-1">
           {imgURL && (
-            <Image
-              src={imgURL}
-              alt={title}
-              width={200}
-              height={100}
-              className="w-full h-[50%] min-h-[50%] object-cover"
-            />
+            <Suspense
+              fallback={<Skeleton className="w-full h-40 sm:h-60 md:h-60" />}
+            >
+              <Image
+                src={imgURL}
+                alt={title}
+                width={200}
+                height={100}
+                className="flex-none w-full object-cover h-40 sm:h-60 md:h-60"
+              />
+            </Suspense>
           )}
-          {!imgURL && (
-            <div className="w-full h-[50%] min-h-[50%] bg-muted flex items-center justify-center">
-              <span className="text-muted-foreground text-sm">No Image</span>
-            </div>
-          )}
-
-
-          <div className="flex flex-col h-full max-h-[50%] w-full items-center justify-between p-4 gap-2">
-            <div className="flex flex-col items-center gap-2">
-              <CardTitle className="lg:text-xl">{title}</CardTitle>
-              <CardDescription className="text-center w-full">
-                {description}
-              </CardDescription>
-            </div>
+          {!imgURL && <Skeleton className="w-full h-40 sm:h-60 md:h-60" />}
+          <div className="flex flex-1 flex-col items-center gap-2 w-full p-4">
+            <CardTitle className="lg:text-xl">{title}</CardTitle>
+            <p className="flex flex-1 text-center items-center w-full">{description}</p>
             {/* Marquee container for small/medium screens */}
-            <div className="flex items-center w-full h-[50%] ">
-              <div className="relative w-full overflow-hidden p-2 lg:hidden">
-                <div
-                  className={`flex gap-2 ${
-                    tags.length > 3 || checkCharsInTags() > 20
-                      ? "animate-marquee"
-                      : "flex-wrap"
-                  }`}
-                  style={{
-                    whiteSpace:
-                      tags.length > 3 || checkCharsInTags() > 20
-                        ? "nowrap"
-                        : "normal",
-                  }}
-                >
-                  {tags.map((tag, index) => (
-                    <Badge 
-                      key={"tag-" + index} 
-                      className="shrink-0" 
-                      style={{ 
-                        backgroundColor: tag.background, 
+            
+            <Marquee className="rounded-full p-1 md:hidden overflow-hidden">
+              <MarqueeContent
+                speed={20}
+                autoFill={true}
+                pauseOnHover={true}
+                gradient={false}
+                className="items-center rounded-full"
+                
+              >
+                {tags.map((tag, index) => (
+                  <MarqueeItem className="m-1">
+                    <Badge
+                      key={"tag-marquee-" + index}
+                      className="shrink-0"
+                      style={{
+                        backgroundColor: tag.background,
                         color: tag.foreground,
-                        
                       }}
-                      
                     >
                       {tag.title}
                     </Badge>
-                  ))}
-                  {(tags.length > 3 || checkCharsInTags() > 20) &&
-                    tags.map((tag, index) => (
-                      <Badge 
-                        key={"tag-duplicate-" + index} 
-                        className="shrink-0" 
-                        style={{ 
-                          backgroundColor: tag.background, 
-                          color: tag.foreground,
-                          
-                        }}
-                        
-                      >
-                        {tag.title}
-                      </Badge>
-                    ))}
-                </div>
-              </div>
-              {/* Wrapped container for large screens */}
-
-              <div className="hidden lg:flex w-full h-min gap-2 p-2 flex-wrap justify-start">
-                {tags.map((tag, index) => (
-                  <Badge 
-                    key={"tag-lg-" + index} 
-                    className="shrink-0" 
-                    style={{ 
-                      backgroundColor: tag.background, 
-                      color: tag.foreground,
-                      
-                    }}
-                    
-                  >
-                    {tag.title}
-                  </Badge>
+                  </MarqueeItem>
                 ))}
-              </div>
+              </MarqueeContent>
+            </Marquee>
+
+            {/* Wrapped container for large screens */}
+
+            <div className="hidden md:flex w-full gap-2 p-2 flex-wrap justify-start ">
+              {tags.map((tag, index) => (
+                <Badge
+                  key={"tag-lg-" + index}
+                  className="shrink-0"
+                  style={{
+                    backgroundColor: tag.background,
+                    color: tag.foreground,
+                  }}
+                >
+                  {tag.title}
+                </Badge>
+              ))}
             </div>
           </div>
         </CardContent>

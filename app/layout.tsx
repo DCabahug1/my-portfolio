@@ -13,8 +13,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Duane Cabahug",
   description: "",
-  icons: '/images/Logo.png',
-  
+  icons: "/images/Logo.png",
 };
 
 export default function RootLayout({
@@ -25,17 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} bg-background text-foreground antialiased relative font-sans overflow-y-auto transition-all duration-300`}
+        className={`${poppins.variable} bg-background text-foreground antialiased relative font-sans overflow-y-auto`}
       >
         <script
           src="https://kit.fontawesome.com/43f035c78d.js"
           crossOrigin="anonymous"
         ></script>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NavBar />
           {children}
         </ThemeProvider>
