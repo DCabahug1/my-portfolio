@@ -11,7 +11,6 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion } from "motion/react";
 
 import {
   Marquee,
@@ -19,7 +18,6 @@ import {
   MarqueeFade,
   MarqueeItem,
 } from "@/components/ui/shadcn-io/marquee";
-import { useEffect, useState } from "react";
 import { getIcon } from "@/components/Icones/LogoIcons";
 
 function ProjectCard({
@@ -41,30 +39,11 @@ function ProjectCard({
   }[];
   link: string;
 }) {
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const checkCharsInTags = () => {
-    let totalChars = 0;
-
-    tags.forEach((tag) => {
-      totalChars += tag.title.length;
-    });
-
-    return totalChars;
-  };
-
-  // console.log(tags);
 
   return (
-    <motion.div
+    <div
       className="p-1 w-full h-full"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <Card
         className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col"
@@ -121,7 +100,7 @@ function ProjectCard({
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }
 

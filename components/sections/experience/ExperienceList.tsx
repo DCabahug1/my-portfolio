@@ -21,6 +21,7 @@ function ExperienceList() {
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
+      viewport={{once: true}}
     >
       <h2 className="text-3xl font-bold">Experience</h2>
       <Card className="w-full max-w-xl p-0 overflow-hidden">

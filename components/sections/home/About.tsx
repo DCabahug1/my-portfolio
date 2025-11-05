@@ -9,6 +9,7 @@ function About() {
       initial={{ y: 100, opacity: 0 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
+      viewport={{once: true}}
     >
     <div className="flex flex-col items-center justify-center gap-2">
       <h2 className="xl:hidden text-3xl font-bold">About Me</h2>

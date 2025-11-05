@@ -31,11 +31,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.variable} bg-background text-foreground antialiased `}
+        className={`${poppins.variable} bg-background text-foreground antialiased h-[100svh] `}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <GradientBackground className="absolute inset-0 flex items-center justify-center"/>
-          <div className="relative z-10 font-sans overflow-y-auto h-screen">
+          <GradientBackground className="absolute inset-0 flex items-center justify-center h-[100svh]"/>
+          <div className="relative z-10 font-sans overflow-y-auto h-[100svh]">
             <NavBar />
             {children}
           </div>

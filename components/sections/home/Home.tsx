@@ -14,6 +14,7 @@ function Home() {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }}
+      viewport={{once: true}}
     >
       <Profile />
       <div className="hidden xl:block">
