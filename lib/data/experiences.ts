@@ -2,7 +2,7 @@ import { getBadgeStyling } from "./badgeStyling";
 
 export const experienceList = [
   {
-    imgSrc: "",
+    imgSrc: "/images/VCDCSS.jpeg",
     title: "System Administration Intern",
     location: "Ventura County Department of Child Support Services",
     description:
