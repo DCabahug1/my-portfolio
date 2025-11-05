@@ -30,7 +30,7 @@ function Profile() {
       <p className="text-xl xl:text-2xl">Full Stack Developer</p>
       <div className="flex gap-4 items-center justify-between">
         <Link
-          href="mailto:duane.cabahug@gmail.com"
+          href="mailto:duanecabahug6@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
