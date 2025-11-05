@@ -11,6 +11,7 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { motion } from "motion/react";
 
 import {
   Marquee,
@@ -59,7 +60,12 @@ function ProjectCard({
   // console.log(tags);
 
   return (
-    <div className="p-1 w-full h-full">
+    <motion.div
+      className="p-1 w-full h-full"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <Card
         className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col"
         onClick={() => window.open(link, "_blank")}
@@ -81,9 +87,11 @@ function ProjectCard({
           {!imgURL && <Skeleton className="w-full h-40 sm:h-60 md:h-60" />}
           <div className="flex flex-1 flex-col items-center gap-2 w-full p-4">
             <CardTitle className="lg:text-xl">{title}</CardTitle>
-            <p className="flex flex-1 text-center text-muted-foreground items-center w-full">{description}</p>
+            <p className="flex flex-1 text-center text-muted-foreground items-center w-full">
+              {description}
+            </p>
             {/* Marquee container for small/medium screens */}
-            
+
             <Marquee className="rounded-lg overflow-hidden">
               <MarqueeContent
                 speed={20}
@@ -91,7 +99,6 @@ function ProjectCard({
                 pauseOnHover={true}
                 gradient={false}
                 className="items-center"
-                
               >
                 {tags.map((tag, index) => (
                   <MarqueeItem className="m-1">
@@ -111,11 +118,10 @@ function ProjectCard({
                 ))}
               </MarqueeContent>
             </Marquee>
-
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 

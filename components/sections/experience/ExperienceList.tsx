@@ -11,12 +11,16 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { getIcon } from "@/components/Icones/LogoIcons";
+import {motion} from "motion/react";
 
 function ExperienceList() {
   return (
-    <div
+    <motion.div
       id="experience"
       className="flex flex-col items-center justify-center h-min w-full p-8 gap-4"
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
     >
       <h2 className="text-3xl font-bold">Experience</h2>
       <Card className="w-full max-w-xl p-0 overflow-hidden">
@@ -62,7 +66,7 @@ function ExperienceList() {
           ))}
         </Accordion>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 
