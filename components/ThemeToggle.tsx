@@ -7,38 +7,39 @@ import { Sun, Moon } from "lucide-react";
 
 function ThemeToggle() {
   const { theme, systemTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
 
-    if (systemTheme === 'dark') {
-      setTheme('dark')
+    if (systemTheme === "dark") {
+      setTheme("dark");
     } else {
-      setTheme('light')
+      setTheme("light");
     }
-  }, [])
+  }, []);
 
   const toggleTheme = () => {
-    if (theme === 'dark') {
-      setTheme('light')
+    if (theme === "dark") {
+      setTheme("light");
     } else {
-      setTheme('dark')
+      setTheme("dark");
     }
-  }
+  };
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
     <div>
-      <Button variant="outline" size="icon" className="cursor-pointer" onClick={toggleTheme}>
-        {theme === "dark" ? (
-          <Moon />
-        ) : (
-          <Sun />
-        )}
+      <Button
+        variant="outline"
+        size="icon"
+        className="cursor-pointer opacity-70"
+        onClick={toggleTheme}
+      >
+        {theme === "dark" ? <Moon /> : <Sun />}
       </Button>
     </div>
   );
