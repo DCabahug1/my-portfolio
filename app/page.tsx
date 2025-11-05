@@ -25,7 +25,7 @@ function page() {
       </Button>
       <ExperienceList />
       <Projects />
-      <Contact />
+      {/* <Contact /> */}
     </div>
   );
 }

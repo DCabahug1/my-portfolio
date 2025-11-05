@@ -26,10 +26,6 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} bg-background text-foreground antialiased relative font-sans overflow-y-auto`}
       >
-        <script
-          src="https://kit.fontawesome.com/43f035c78d.js"
-          crossOrigin="anonymous"
-        ></script>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NavBar />
           {children}

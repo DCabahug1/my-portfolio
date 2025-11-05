@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 
 function ThemeToggle() {
   const { theme, systemTheme, setTheme } = useTheme();
@@ -34,9 +35,9 @@ function ThemeToggle() {
     <div>
       <Button variant="outline" size="icon" className="cursor-pointer" onClick={toggleTheme}>
         {theme === "dark" ? (
-          <i className="fa-solid fa-moon"></i>
+          <Moon />
         ) : (
-          <i className="fa-solid fa-sun"></i>
+          <Sun />
         )}
       </Button>
     </div>
