@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/Navigation";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { GradientBackground } from "@/components/animate-ui/components/backgrounds/gradient";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -31,11 +31,14 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.variable} bg-background text-foreground antialiased relative font-sans overflow-y-auto`}
+        className={`${poppins.variable} bg-background text-foreground antialiased `}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NavBar />
-          {children}
+          <GradientBackground className="absolute inset-0 flex items-center justify-center"/>
+          <div className="relative z-10 font-sans overflow-y-auto h-screen">
+            <NavBar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
