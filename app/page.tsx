@@ -11,7 +11,7 @@ import {motion} from "motion/react";
 
 function page() {
   return (
-    <div className="flex flex-col items-center font-sans p-8 w-full">
+    <div className="flex flex-col items-center font-sans px-8 w-full">
       <Home />
       <AboutMobile />
       <motion.div
