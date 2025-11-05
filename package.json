@@ -28,6 +28,10 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@iconify-json/lineicons": "^1.2.6",
+    "@iconify-json/logos": "^1.2.10",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/tabler": "^1.2.23",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

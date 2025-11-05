@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { getIcon } from "@/components/Icones/LogoIcons";
 
 function ExperienceList() {
   return (
@@ -25,7 +26,9 @@ function ExperienceList() {
               <AccordionTrigger className="px-6 !no-underline cursor-pointer rounded-none">
                 <div className="flex flex-col gap-2">
                   <h2 className="font-bold">{experience.location}</h2>
-                  <p className="text-muted-foreground font-thin">{experience.title}</p>
+                  <p className="text-muted-foreground font-medium">
+                    {experience.title}
+                  </p>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="flex flex-col items-center gap-6 px-6">
@@ -41,7 +44,17 @@ function ExperienceList() {
                 <p>{experience.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {experience.tags.map((tag, index) => (
-                    <Badge key={index}>{tag}</Badge>
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      style={{
+                        backgroundColor: tag.background,
+                        color: tag.foreground,
+                      }}
+                    >
+                      {getIcon(tag.icon, { className: "w-4 h-4" })}
+                      {tag.title}
+                    </Badge>
                   ))}
                 </div>
               </AccordionContent>
