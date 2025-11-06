@@ -3,6 +3,7 @@ import { ExperienceItem } from "@/lib/data/experiences";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "motion/react";
+import { getIcon } from "@/components/Icones/LogoIcons";
 
 function Experience({
   experience,
@@ -38,9 +39,9 @@ function Experience({
         />
         <div className="flex flex-col gap-2">
 
+        <p className="lg:hidden font-semibold">{experience.date}</p>
         <h2 className="text-lg font-semibold">{experience.role}</h2>
-        <p className="text-sm text-muted-foreground">{experience.location}</p>
-        <p className="lg:hidden text-sm font-semibold">{experience.date}</p>
+        <p className="text-foreground/60">{experience.location}</p>
         <p className="max-w-2xl">{experience.description}</p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -50,6 +51,7 @@ function Experience({
               className="badge"
               style={{ backgroundColor: tag.background, color: tag.foreground }}
             >
+              {getIcon(tag.icon, { className: "w-4 h-4" })}
               {tag.title}
             </Badge>
           ))}
