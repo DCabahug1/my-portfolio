@@ -25,39 +25,44 @@ function Experience({
         {!isEnd ? <div className="h-full w-0.5 bg-white "></div> : null}
       </div>
       {/* Experience Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="flex flex-col gap-4 pb-4 pt-2 "
-      >
+      <div className="flex flex-col pt-2">
         <p className="lg:hidden font-semibold">{experience.date}</p>
-        <Image
-          src={experience.imgSrc}
-          alt={experience.role}
-          width={200}
-          height={200}
-          className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-white"
-        />
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold">{experience.role}</h2>
-          <p className="text-foreground/60">{experience.location}</p>
-          <p className="max-w-2xl">{experience.description}</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {experience.tags.map((tag, index) => (
-            <Badge
-              key={index}
-              className="badge"
-              style={{ backgroundColor: tag.background, color: tag.foreground }}
-            >
-              {getIcon(tag.icon, { className: "w-4 h-4" })}
-              {tag.title}
-            </Badge>
-          ))}
-        </div>
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="flex flex-col gap-4 pb-4 pt-2 "
+        >
+          <Image
+            src={experience.imgSrc}
+            alt={experience.role}
+            width={200}
+            height={200}
+            className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-white"
+          />
+          <div className="flex flex-col gap-2">
+            <h2 className="text-lg font-semibold">{experience.role}</h2>
+            <p className="text-foreground/60">{experience.location}</p>
+            <p className="max-w-2xl">{experience.description}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {experience.tags.map((tag, index) => (
+              <Badge
+                key={index}
+                className="badge"
+                style={{
+                  backgroundColor: tag.background,
+                  color: tag.foreground,
+                }}
+              >
+                {getIcon(tag.icon, { className: "w-4 h-4" })}
+                {tag.title}
+              </Badge>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
