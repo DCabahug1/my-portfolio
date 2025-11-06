@@ -11,7 +11,7 @@ function Home() {
     <motion.div
       id="home"
       className="flex items-center justify-center gap-12 h-screen w-full"
-      initial={{ y: 100, opacity: 0 }}
+      initial={{ y: 200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }}
       viewport={{once: true}}

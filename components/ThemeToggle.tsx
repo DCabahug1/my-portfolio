@@ -34,9 +34,9 @@ function ThemeToggle() {
   return (
     <div>
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="cursor-pointer opacity-70"
+        className="cursor-pointer"
         onClick={toggleTheme}
       >
         {theme === "dark" ? <Moon /> : <Sun />}

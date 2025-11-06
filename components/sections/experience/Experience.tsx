@@ -14,13 +14,13 @@ function Experience({
 }) {
   return (
     <div className="flex gap-8 justify-end w-full">
-      {/* Timeline Dot and Line */}
       <h2 className="hidden lg:block text-lg font-semibold text-nowrap">
         {experience.date}
       </h2>
+      {/* Timeline Dot and Line */}
       <div className="flex flex-col items-center">
-        <div className="rounded-full h-10 w-10 bg-primary">{/* Icon */}</div>
-        {!isEnd ? <div className="h-full w-0.5 bg-primary"></div> : null}
+        <div className="rounded-full h-10 w-10 bg-card border-card-foreground border-4 shadow-2xl ">{/* Icon */}</div>
+        {!isEnd ? <div className="h-full w-0.5 bg-primary "></div> : null}
       </div>
       {/* Experience Content */}
       <motion.div
@@ -28,14 +28,14 @@ function Experience({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="flex flex-col gap-4 py-4"
+        className="flex flex-col gap-4 py-4 "
       >
         <Image
           src={experience.imgSrc}
           alt={experience.role}
           width={200}
           height={200}
-          className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-primary"
+          className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-white"
         />
         <div className="flex flex-col gap-2">
 
