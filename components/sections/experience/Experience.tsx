@@ -19,8 +19,8 @@ function Experience({
       </h2>
       {/* Timeline Dot and Line */}
       <div className="flex flex-col items-center">
-        <div className="rounded-full h-10 w-10 bg-card border-card-foreground border-4 shadow-2xl ">{/* Icon */}</div>
-        {!isEnd ? <div className="h-full w-0.5 bg-primary "></div> : null}
+        <div className="rounded-full h-10 w-10 border-white border-4 shadow-2xl ">{/* Icon */}</div>
+        {!isEnd ? <div className="h-full w-0.5 bg-white "></div> : null}
       </div>
       {/* Experience Content */}
       <motion.div
