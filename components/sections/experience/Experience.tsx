@@ -19,7 +19,9 @@ function Experience({
       </h2>
       {/* Timeline Dot and Line */}
       <div className="flex flex-col items-center">
-        <div className="rounded-full h-10 w-10 border-white border-4 shadow-2xl ">{/* Icon */}</div>
+        <div className="rounded-full h-10 w-10 border-white border-4 shadow-2xl ">
+          {/* Icon */}
+        </div>
         {!isEnd ? <div className="h-full w-0.5 bg-white "></div> : null}
       </div>
       {/* Experience Content */}
@@ -28,8 +30,9 @@ function Experience({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="flex flex-col gap-4 py-4 "
+        className="flex flex-col gap-4 pb-4 pt-2 "
       >
+        <p className="lg:hidden font-semibold">{experience.date}</p>
         <Image
           src={experience.imgSrc}
           alt={experience.role}
@@ -38,11 +41,9 @@ function Experience({
           className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-white"
         />
         <div className="flex flex-col gap-2">
-
-        <p className="lg:hidden font-semibold">{experience.date}</p>
-        <h2 className="text-lg font-semibold">{experience.role}</h2>
-        <p className="text-foreground/60">{experience.location}</p>
-        <p className="max-w-2xl">{experience.description}</p>
+          <h2 className="text-lg font-semibold">{experience.role}</h2>
+          <p className="text-foreground/60">{experience.location}</p>
+          <p className="max-w-2xl">{experience.description}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {experience.tags.map((tag, index) => (
