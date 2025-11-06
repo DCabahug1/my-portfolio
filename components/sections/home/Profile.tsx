@@ -22,7 +22,7 @@ function Profile() {
             alt="Duane Cabahug Profile Image"
             width={200}
             height={200}
-            className={`xl:w-64 xl:h-64 rounded-full border-8 border-primary shadow-[0_0_30px_0_#000] shadow-primary/50 `}
+            className={`xl:w-64 xl:h-64 rounded-full border-8 border-black dark:border-white shadow-[0_0_30px_0_#000] shadow-primary/50 `}
           />
         </Suspense>
       </div>

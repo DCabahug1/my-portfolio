@@ -46,7 +46,7 @@ function ProjectCard({
       className="p-1 w-full h-full"
     >
       <Card
-        className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col"
+        className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col rounded-lg"
         onClick={() => window.open(link, "_blank")}
       >
         <CardContent className="flex flex-col items-center p-0 w-full flex-1">

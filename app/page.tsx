@@ -8,6 +8,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import ExperienceList from "@/components/sections/experience/ExperienceList";
 import {motion} from "motion/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 
 function page() {
   return (
@@ -22,10 +24,11 @@ function page() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >
-      <Button className="w-48 h-min text-xl hover:shadow-[0_0_20px_0_#000] hover:shadow-primary/80 m-8">
+      <Button className="w-48 h-min text-xl hover:shadow-[0_0_20px_0_#000] hover:shadow-primary/80 m-8 cursor-pointer">
         <a href="/Duane_Cabahug_Resume.pdf" target="_blank">
           View Resume
         </a>
+        <FontAwesomeIcon icon={faFile} />
       </Button>
       </motion.div>
       <ExperienceList />
