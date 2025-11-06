@@ -18,7 +18,7 @@ function Profile() {
           }
         >
           <Image
-            src="/images/Portrait.jpg"
+            src="/images/Portrait.png"
             alt="Duane Cabahug Profile Image"
             width={200}
             height={200}
