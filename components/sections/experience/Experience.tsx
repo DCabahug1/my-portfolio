@@ -14,9 +14,15 @@ function Experience({
 }) {
   return (
     <div className="flex gap-8 justify-end w-full">
-      <h2 className="hidden lg:block text-lg font-semibold text-nowrap">
+      <motion.h2
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.5 }}
+        viewport={{ once: true }}
+        className="hidden lg:block text-lg font-semibold text-nowrap"
+      >
         {experience.date}
-      </h2>
+      </motion.h2>
       {/* Timeline Dot and Line */}
       <div className="flex flex-col items-center">
         <div className="rounded-full h-10 w-10 border-white border-4 shadow-2xl ">
@@ -25,21 +31,21 @@ function Experience({
         {!isEnd ? <div className="h-full w-0.5 bg-white "></div> : null}
       </div>
       {/* Experience Content */}
-      <div className="flex flex-col pt-2">
+      <motion.div
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.5 }}
+        viewport={{ once: true }}
+        className="flex flex-col pt-2"
+      >
         <p className="lg:hidden font-semibold">{experience.date}</p>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="flex flex-col gap-4 pb-4 pt-2 "
-        >
+        <div className="flex flex-col gap-4 pb-4 pt-2 ">
           <Image
             src={experience.imgSrc}
             alt={experience.role}
-            width={200}
-            height={200}
-            className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-2 border-white"
+            width={1200}
+            height={1200}
+            className="rounded-lg object-cover h-64 sm:h-80 w-full max-w-2xl border-3 border-white shadow-lg"
           />
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-semibold">{experience.role}</h2>
@@ -61,8 +67,8 @@ function Experience({
               </Badge>
             ))}
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

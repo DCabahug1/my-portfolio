@@ -36,7 +36,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GradientBackground className="absolute inset-0 flex items-center justify-center h-[100svh]" />
           <div className="relative z-10 font-sans overflow-y-auto h-[100svh]">
-            <NavBar />
             {children}
           </div>
         </ThemeProvider>

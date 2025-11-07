@@ -10,10 +10,10 @@ function Home() {
   return (
     <motion.div
       id="home"
-      className="flex items-center justify-center gap-12 h-screen w-full"
+      className="flex items-center justify-center gap-12 h-screen min-h-screen w-full"
       initial={{ y: 200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 1.5 }}
       viewport={{once: true}}
     >
       <Profile />

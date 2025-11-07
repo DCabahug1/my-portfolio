@@ -19,14 +19,17 @@ import {
   MarqueeItem,
 } from "@/components/ui/shadcn-io/marquee";
 import { getIcon } from "@/components/Icones/LogoIcons";
+import { motion } from "motion/react";
 
 function ProjectCard({
+  index,
   imgURL,
   title,
   description,
   tags,
   link,
 }: {
+  index: number;
   imgURL: string;
   title: string;
   description: string;
@@ -42,11 +45,15 @@ function ProjectCard({
 
 
   return (
-    <div
+    <motion.div
       className="p-1 w-full h-full"
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: index * 0.1 }}
+      viewport={{once: true}}
     >
       <Card
-        className="p-0 overflow-hidden cursor-pointer hover:border-primary transition-all duration-200 w-full h-full flex flex-col rounded-lg"
+        className="p-0 overflow-hidden cursor-pointer border-3 border-primary/20 hover:border-primary transition-all duration-200 w-full h-full flex flex-col rounded-lg"
         onClick={() => window.open(link, "_blank")}
       >
         <CardContent className="flex flex-col items-center p-0 w-full flex-1">
@@ -57,8 +64,8 @@ function ProjectCard({
               <Image
                 src={imgURL}
                 alt={title}
-                width={200}
-                height={100}
+                width={1200}
+                height={1200}
                 className="flex-none w-full object-cover h-40 sm:h-60 md:h-60"
               />
             </Suspense>
@@ -100,7 +107,7 @@ function ProjectCard({
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 

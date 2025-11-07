@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 
-function ThemeToggle() {
+function ThemeToggle({ isScrolled }: { isScrolled: boolean }) {
   const { theme, systemTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -36,7 +36,7 @@ function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className="cursor-pointer"
+        className={`cursor-pointer rounded-full ${isScrolled ? "text-black hover:bg-black/10" : ""}`}
         onClick={toggleTheme}
       >
         {theme === "dark" ? <Moon /> : <Sun />}

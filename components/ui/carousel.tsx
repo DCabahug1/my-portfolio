@@ -140,6 +140,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
       ref={carouselRef}
       className="overflow-hidden"
       data-slot="carousel-content"
+      onWheel={(e) => e.preventDefault()}
+      onScroll={(e) => e.preventDefault()}
     >
       <div
         className={cn(

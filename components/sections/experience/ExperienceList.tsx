@@ -1,3 +1,5 @@
+
+"use client";
 import React from 'react'
 import Experience from './Experience'
 import { experienceList } from '@/lib/data/experiences'
@@ -8,7 +10,7 @@ function ExperienceList() {
     <motion.div className=' flex flex-col items-center'
     initial={{ opacity: 0, y: 100 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
+    transition={{ duration: 1.5 }}
     viewport={{once: true}}
     >
       <h1 id="experience" className='text-3xl font-bold mb-4'>Experience</h1>
