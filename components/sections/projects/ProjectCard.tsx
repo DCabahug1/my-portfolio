@@ -49,7 +49,7 @@ function ProjectCard({
       className="p-1 w-full h-full"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: index * 0.1 }}
+      transition={{ duration: 0.75, delay: (index <= 3) ? index * 0.1 : 0 }}
       viewport={{once: true}}
     >
       <Card

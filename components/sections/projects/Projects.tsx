@@ -21,7 +21,7 @@ function Projects() {
       <motion.h2
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 0.75 }}
         viewport={{once: true}}
         className="text-3xl font-bold mb-4"
       >Projects</motion.h2>
