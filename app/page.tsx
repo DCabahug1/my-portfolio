@@ -10,7 +10,7 @@ function page() {
   return (
     <div
       id="page"
-      className="flex flex-col items-center font-sans px-8 w-full h-screen overflow-y-auto"
+      className="flex flex-col items-center font-sans px-8 w-full h-screen overflow-y-auto overflow-x-hidden"
     >
       <NavBar />
       <Home />
