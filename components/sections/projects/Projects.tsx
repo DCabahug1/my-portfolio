@@ -25,6 +25,12 @@ function Projects() {
         viewport={{once: true}}
         className="text-3xl font-bold mb-4"
       >Projects</motion.h2>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.75 }}
+        viewport={{once: true}}
+      >
       <Carousel
         className="w-[250px] sm:w-[300px] md:w-[600px] lg:w-[900px] overflow-visible"
         opts={{
@@ -48,6 +54,7 @@ function Projects() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      </motion.div>
     </div>
   );
 }
