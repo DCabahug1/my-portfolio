@@ -1,7 +1,50 @@
 import { getBadgeStyling } from "./badgeStyling";
 
+interface Project {
+  imgURL: string;
+  title: string;
+  description: string;
+  tags: {
+    title: string;
+    priority: string;
+    background: string;
+    foreground: string;
+    icon: string;
+  }[];
+  link: string;
+}
+
 // Projects
-export const projectsList = [
+export const projectsList: Project[] = [
+  {
+    title: "TopicTutor",
+    imgURL: "/images/TopicTutor.png",
+    description:
+      "Adaptive learning platform with placement tests, personalized courses, and smart analytics",
+    tags: [
+      {
+        title: "Next.js",
+        priority: "high",
+        ...getBadgeStyling("Next.js"),
+      },
+      {
+        title: "OpenAI",
+        priority: "high",
+        ...getBadgeStyling("OpenAI"),
+      },
+      {
+        title: "Supabase",
+        priority: "medium",
+        ...getBadgeStyling("Supabase"),
+      },
+      {
+        title: "Tailwind",
+        priority: "medium",
+        ...getBadgeStyling("Tailwind"),
+      },
+    ],
+    link: "https://topictutor.vercel.app/",
+  },
   {
     imgURL: "/images/Memos.png",
     title: "Memos",
