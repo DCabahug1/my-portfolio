@@ -31,7 +31,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.variable} bg-black text-foreground antialiased h-[100svh] overflow-hidden`}
+        className={`${poppins.variable} bg-black text-foreground antialiased h-[100svh] overflow-hidden`} suppressHydrationWarning={true}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <GradientBackground className="absolute inset-0 flex items-center justify-center h-[100svh]" />
