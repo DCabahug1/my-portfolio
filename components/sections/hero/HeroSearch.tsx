@@ -88,19 +88,12 @@ function HeroSearch() {
           {/* Header */}
           <div className="border-b border-border px-6 py-4 shrink-0">
             <DialogHeader>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center rounded-full bg-primary/15 p-2">
-                  <Bot className="size-5 text-primary" />
+              <DialogTitle asChild>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-semibold text-primary">DuaneAI</span>
+                  <Sparkles className="size-4 fill-current text-primary" />
                 </div>
-                <div>
-                  <DialogTitle className="text-base font-semibold leading-none">
-                    Ask DuaneAI <Sparkles className="size-4 text-primary" />
-                  </DialogTitle>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Powered by AI · Based on real experience
-                  </p>
-                </div>
-              </div>
+              </DialogTitle>
             </DialogHeader>
           </div>
 
