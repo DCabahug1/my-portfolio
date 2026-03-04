@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavBar from "../components/Navigation";
-import { ThemeProvider } from "@/components/theme-provider";
-import { GradientBackground } from "@/components/animate-ui/components/backgrounds/gradient";
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 export const metadata: Metadata = {
   title: "Duane Cabahug",
@@ -30,14 +23,9 @@ export default function RootLayout({
           src="https://tweakcn.com/live-preview.min.js"
         />
       </head>
-      <body
-        className={`${poppins.variable} bg-black text-foreground antialiased h-[100svh] overflow-hidden`} suppressHydrationWarning={true}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <GradientBackground className="absolute inset-0 flex items-center justify-center h-[100svh]" />
-          <div className="relative z-10 font-sans overflow-y-auto h-[100svh]">
-            {children}
-          </div>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -1,22 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 
-function ThemeToggle({ isScrolled }: { isScrolled: boolean }) {
-  const { theme, systemTheme, setTheme } = useTheme();
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-
-    if (systemTheme === "dark") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
   }, []);
 
   const toggleTheme = () => {
@@ -36,7 +30,6 @@ function ThemeToggle({ isScrolled }: { isScrolled: boolean }) {
       <Button
         variant="ghost"
         size="icon"
-        className={`cursor-pointer rounded-full ${isScrolled ? "text-black hover:bg-black/10" : ""}`}
         onClick={toggleTheme}
       >
         {theme === "dark" ? <Moon /> : <Sun />}
