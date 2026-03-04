@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Loader2 } from "lucide-react";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -22,19 +22,13 @@ function ThemeToggle() {
   };
 
   if (!mounted) {
-    return null;
+    return <Button variant="ghost" size="icon" onClick={toggleTheme}><Loader2 className="animate-spin" /></Button>;
   }
 
   return (
-    <div>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={toggleTheme}
-      >
-        {theme === "dark" ? <Moon /> : <Sun />}
-      </Button>
-    </div>
+    <Button variant="ghost" size="icon" onClick={toggleTheme}>
+      {theme === "dark" ? <Moon /> : <Sun />}
+    </Button>
   );
 }
 
