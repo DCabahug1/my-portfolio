@@ -20,7 +20,7 @@ interface Project {
 export const projectsList: Project[] = [
   {
     title: "ASLingo",
-    imgURL: "/images/ASLingo.png",
+    imgURL: "/images/ASLingo.jpg",
     description: "AI-powered American Sign Language learning platform.",
     impacts: [
       "Real-time ASL gesture recognition using MediaPipe",
