@@ -1,6 +1,15 @@
 "use client";
 import { motion } from "motion/react";
 import { fadeUp } from "@/components/sections/hero/variants";
+import AboutTag from "./AboutTag";
+import { Code2, BrainCircuit, Rocket, Users } from "lucide-react";
+
+const tags = [
+  { icon: Code2, label: "Full-Stack Development" },
+  { icon: BrainCircuit, label: "AI & Machine Learning" },
+  { icon: Rocket, label: "Rapid Prototyping" },
+  { icon: Users, label: "Technical Leadership" },
+];
 
 function About() {
   return (
@@ -61,6 +70,18 @@ function About() {
         <strong className="font-semibold text-foreground">AI</strong> and
         large-scale systems.
       </motion.p>
+      <motion.div
+        className="flex flex-wrap justify-center sm:justify-start gap-2"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        custom={0.3}
+      >
+        {tags.map((tag) => (
+          <AboutTag key={tag.label} icon={tag.icon} label={tag.label} />
+        ))}
+      </motion.div>
     </div>
   );
 }
