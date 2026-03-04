@@ -61,6 +61,7 @@ function HeroSearch() {
         <div className="relative flex-1">
           <input
             type="text"
+            maxLength={100}
             className="bg-transparent outline-none border-none w-full"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -102,7 +103,7 @@ function HeroSearch() {
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               You asked
             </p>
-            <p className="text-base font-semibold text-foreground">{query}</p>
+            <p className="text-base font-semibold text-foreground text-wrap break-words ">{query}</p>
             <div className="border-t border-border" />
             {isLoading ? (
               <div className="flex flex-col gap-2 pt-1">
