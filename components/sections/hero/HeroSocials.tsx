@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { fadeUp } from "./variants";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
+import Link from "next/link";
 
 function HeroSocials() {
   return (
@@ -12,14 +13,20 @@ function HeroSocials() {
       animate="visible"
       custom={0.5}
     >
-      <Button variant="ghost">
-        <Linkedin /> <span className="hidden md:block">LinkedIn</span>
+      <Button variant="ghost" asChild>
+        <Link href="https://www.linkedin.com/in/duane-cabahug/" target="_blank" rel="noopener noreferrer">
+          <Linkedin /> <span className="hidden md:block">LinkedIn</span>
+        </Link>
       </Button>
-      <Button variant="ghost">
-        <Github /> <span className="hidden md:block">GitHub</span>
+      <Button variant="ghost" asChild>
+        <Link href="https://github.com/DCabahug1" target="_blank" rel="noopener noreferrer">
+          <Github /> <span className="hidden md:block">GitHub</span>
+        </Link>
       </Button>
-      <Button variant="ghost">
-        <Mail /> <span className="hidden md:block">Email</span>
+      <Button variant="ghost" asChild>
+        <Link href="mailto:duanecabahug6@gmail.com">
+          <Mail /> <span className="hidden md:block">Email</span>
+        </Link>
       </Button>
     </motion.div>
   );

@@ -1,4 +1,6 @@
 "use client";
+import { motion } from "motion/react";
+import { fadeUp } from "@/components/sections/hero/variants";
 import Header from "@/components/header/Header";
 import ProjectCard from "@/components/sections/projects/ProjectCard";
 import { projectsList } from "@/lib/data/projects";
@@ -17,24 +19,40 @@ function ProjectsPage() {
     <div className="flex flex-col items-center">
       <Header />
       <div className="flex flex-col w-full max-w-6xl px-4 py-16 gap-8">
-        <Link href='/'>
-        <Button>
-            <ArrowLeft className="size-4" />
-            Back to Home
-          </Button>
-        </Link>
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
+          <Link href='/'>
+            <Button>
+              <ArrowLeft className="size-4" />
+              Back to Home
+            </Button>
+          </Link>
+        </motion.div>
+
         {/* Heading */}
-        <div className="flex flex-col items-center sm:items-start gap-2">
-          <h2 className="text-primary text-xl md:text-2xl">All Work</h2>
+        <motion.div
+          className="flex flex-col items-center sm:items-start gap-2"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={0.1}
+        >
+          <h2 className="text-primary text-xl md:text-2xl">Personal Work</h2>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium">
             All Projects
           </h1>
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <div className="w-full flex flex-col gap-5">
-          {projectsList.map((project) => (
-            <Dialog key={project.title}>
+          {projectsList.map((project, i) => (
+            <motion.div
+              key={project.title}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0.2 + i * 0.1}
+            >
+            <Dialog>
               <DialogTrigger asChild>
                 <div>
                   <ProjectCard {...project} />
@@ -90,6 +108,7 @@ function ProjectsPage() {
                 </div>
               </DialogContent>
             </Dialog>
+            </motion.div>
           ))}
         </div>
       </div>
