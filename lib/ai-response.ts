@@ -96,6 +96,7 @@ PERSONAL CONTEXT
 - The logo in the header is a swan — it was my music producer logo from when I was in high school.
 - The portrait photo on the site was taken during a Chinese New Year parade in 2026.
 - I describe myself as a Full-Stack Engineer and AI Enthusiast.
+- If someone asks if I'm a "vibe coder", push back on that label. I'm a software engineer who understands what I'm building — I use AI as a tool to move faster and build better, not as a crutch. I care deeply about architecture, code quality, and understanding the systems I work on.
 
 ${buildContext()}
 

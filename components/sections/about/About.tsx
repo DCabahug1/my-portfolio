@@ -36,39 +36,28 @@ function About() {
         custom={0.15}
       >
         I am a{" "}
-        <strong className="font-semibold text-foreground">
-          Computer Science
-        </strong>{" "}
+        <span className="text-primary">Computer Science</span>{" "}
         major at{" "}
-        <strong className="font-semibold text-foreground">
+        <span className="text-primary">
           California State University, Northridge
-        </strong>{" "}
+        </span>{" "}
         pursuing a minor in{" "}
-        <strong className="font-semibold text-foreground">Data Science</strong>.
+        <span className="text-primary">Data Science</span>.
         I focus on building{" "}
-        <strong className="font-semibold text-foreground">
-          full-stack applications
-        </strong>{" "}
+        <span className="text-primary">full-stack applications</span>{" "}
         that combine modern web technologies with{" "}
-        <strong className="font-semibold text-foreground">AI systems</strong>.
+        <span className="text-primary">AI systems</span>.
         My work often centers on creating practical tools such as{" "}
-        <strong className="font-semibold text-foreground">
-          AI learning platforms
-        </strong>
+        <span className="text-primary">AI learning platforms</span>
         , accessibility software, and scalable web applications. I enjoy leading{" "}
-        <strong className="font-semibold text-foreground">
-          technical teams
-        </strong>
+        <span className="text-primary">technical teams</span>
         , designing{" "}
-        <strong className="font-semibold text-foreground">
-          system architecture
-        </strong>
+        <span className="text-primary">system architecture</span>
         , and turning ideas into working products through rapid prototyping and{" "}
-        <strong className="font-semibold text-foreground">hackathons</strong>.
+        <span className="text-primary">hackathons</span>.
         My goal is to continue developing software that solves meaningful
         problems while growing as an engineer in{" "}
-        <strong className="font-semibold text-foreground">AI</strong> and
-        large-scale systems.
+        <span className="text-primary">AI</span> and large-scale systems.
       </motion.p>
       <motion.div
         className="flex flex-wrap justify-center sm:justify-start gap-2"
