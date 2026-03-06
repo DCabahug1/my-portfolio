@@ -7,27 +7,28 @@ import Link from "next/link";
 function HeroActions() {
   return (
     <motion.div
-      className="flex flex-col md:flex-row gap-2"
+      className="flex flex-row flex-wrap justify-center sm:justify-start gap-2"
       variants={fadeUp}
       initial="hidden"
       animate="visible"
       custom={0.4}
     >
-      <Button variant="default" asChild>
+      <Button variant="default" size="sm" className="rounded-full px-4" asChild>
         <Link href="/#projects">
-        <ArrowDown />
+          <ArrowDown className="size-3.5" />
           View Projects
         </Link>
       </Button>
-      
-      <Button variant="outline" asChild>
-        <Link href="/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer" >
-          <File /> Download Resume
+
+      <Button variant="outline" size="sm" className="rounded-full px-4" asChild>
+        <Link href="/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <File className="size-3.5" /> Resume
         </Link>
       </Button>
-      <Button variant="outline" asChild>
+
+      <Button variant="outline" size="sm" className="rounded-full px-4" asChild>
         <Link href="mailto:duanecabahug6@gmail.com">
-          <Mail /> Contact
+          <Mail className="size-3.5" /> Contact
         </Link>
       </Button>
     </motion.div>

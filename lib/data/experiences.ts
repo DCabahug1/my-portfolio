@@ -20,7 +20,7 @@ export const experienceList: ExperienceItem[] = [
     imgSrc: "/images/CodeForACause.jpg",
     date: "Nov 2025",
     role: "Tech Lead / Fullstack Developer",
-    location: "Code for a Cause Hackathon · CSUN Society of Software Engineers",
+    location: "Code for a Cause Hackathon · CSUN CECS & Northrop Grumman",
     impacts: [
       "Led development of an AI-powered platform addressing accessibility challenges",
       "Architected fullstack application using modern web technologies",

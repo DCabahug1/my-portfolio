@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight, Bot, Search, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
   Dialog,
@@ -27,8 +27,35 @@ const exampleQueries = [
 function HeroSearch() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
+  const [displayedResponse, setDisplayedResponse] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (!response) {
+      setDisplayedResponse("");
+      return;
+    }
+
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    const words = response.split(" ");
+    let i = 0;
+    setDisplayedResponse("");
+
+    intervalRef.current = setInterval(() => {
+      i++;
+      setDisplayedResponse(words.slice(0, i).join(" "));
+      if (i >= words.length) {
+        clearInterval(intervalRef.current!);
+      }
+    }, 18);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [response]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,8 +95,8 @@ function HeroSearch() {
           />
           {!query && (
             <span className="pointer-events-none absolute inset-0 flex items-center gap-1 text-muted-foreground text-sm text-nowrap overflow-hidden">
-              Ask <span className="text-primary">DuaneAI</span>
-              <Sparkles className="size-3 fill-current text-primary min-w-3 min-h-3" />:&nbsp;
+              Ask <span className="bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
+              <Sparkles className="size-3 fill-current text-pink-400 min-w-3 min-h-3" />:&nbsp;
               <TypeAnimation
                 sequence={exampleQueries.flatMap((q) => [q, 2000])}
                 repeat={Infinity}
@@ -79,8 +106,8 @@ function HeroSearch() {
             </span>
           )}
         </div>
-        <Button type="submit" variant="ghost" size="icon">
-          <ArrowRight className="text-muted-foreground" />
+        <Button type="submit" variant={query.trim().length > 0 ? "default" : "ghost"} size="icon">
+          <ArrowRight className={query.trim().length > 0 ? "text-primary-foreground" : "text-muted-foreground"} />
         </Button>
       </motion.div>
 
@@ -91,8 +118,8 @@ function HeroSearch() {
             <DialogHeader>
               <DialogTitle asChild>
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl font-semibold text-primary">DuaneAI</span>
-                  <Sparkles className="size-4 fill-current text-primary" />
+                  <span className="text-2xl font-semibold bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
+                  <Sparkles className="size-4 fill-current text-pink-400" />
                 </div>
               </DialogTitle>
             </DialogHeader>
@@ -141,7 +168,7 @@ function HeroSearch() {
                   em: ({ children }) => <em className="italic">{children}</em>,
                 }}
               >
-                {response}
+                {displayedResponse}
               </ReactMarkdown>
             )}
           </div>
