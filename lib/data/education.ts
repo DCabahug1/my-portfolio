@@ -12,6 +12,6 @@ export const educationList: EducationItem[] = [
     degree: "Bachelor of Science in Computer Science · Minor in Data Science",
     graduation: "May 2027",
     gpa: "3.56",
-    tags: ["Engineering Honor Society", "Society of Software Engineers"],
+    tags: ["Tau Beta Pi Engineering Honor Society", "Society of Software Engineers"],
   },
 ];
