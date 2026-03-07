@@ -34,7 +34,7 @@ function CTA() {
         custom={0.15}
       >
         <Button asChild variant="default">
-          <Link href="/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <Link href="/resume/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer">
             <File className="size-4" />
             Download Resume
           </Link>

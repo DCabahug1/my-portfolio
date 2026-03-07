@@ -21,7 +21,7 @@ function HeroActions() {
       </Button>
 
       <Button variant="outline" size="sm" className="rounded-full px-4" asChild>
-        <Link href="/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer">
+        <Link href="/resume/Duane_Cabahug_Resume.pdf" target="_blank" rel="noopener noreferrer">
           <File className="size-3.5" /> Resume
         </Link>
       </Button>

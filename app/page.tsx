@@ -6,8 +6,6 @@ import Projects from "@/components/sections/projects/Projects";
 import Skills from "@/components/sections/skills/Skills";
 import Experience from "@/components/sections/experience/Experience";
 import CTA from "@/components/sections/cta/CTA";
-import Footer from "@/components/footer/Footer";
-
 function page() {
   return (
     <div className="flex flex-col items-center">
@@ -20,7 +18,6 @@ function page() {
         <div id="projects" className="w-full scroll-mt-20"><Projects /></div>
         <div id="contact" className="w-full scroll-mt-20"><CTA /></div>
       </div>
-      <Footer />
     </div>
   );
 }
