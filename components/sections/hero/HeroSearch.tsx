@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { fadeUp } from "./variants";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowRight, Bot, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Search, Send, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useState, useEffect, useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -13,7 +13,19 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { getAIResponse } from "@/lib/ai-response";
+import { getAIResponse, type ChatMessage } from "@/lib/ai-response";
+
+const STORAGE_KEY = "duaneai_messages";
+const MAX_USER_MESSAGES = 2;
+
+const CLOSING_LINES = [
+  "That's my context window tapped out — glad we got to chat though.",
+  "And that's all the memory I've got — context isn't cheap, you know.",
+  "That's the last of my context — it's been real.",
+  "Context limit reached. I'd remember more, but RAM is expensive.",
+  "That's a wrap from me — context has its limits, and we just hit one.",
+];
+
 
 const exampleQueries = [
   "Tell me about your latest project...",
@@ -22,7 +34,18 @@ const exampleQueries = [
   "What made you choose computer science?",
 ];
 
+function loadMessages(): ChatMessage[] {
+  if (typeof window === "undefined") return [];
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+  } catch {
+    return [];
+  }
+}
 
+function saveMessages(msgs: ChatMessage[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+}
 
 function HeroSearch() {
   const [query, setQuery] = useState("");
@@ -30,7 +53,14 @@ function HeroSearch() {
   const [displayedResponse, setDisplayedResponse] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [followUpInput, setFollowUpInput] = useState("");
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const followUpRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMessages(loadMessages());
+  }, []);
 
   useEffect(() => {
     if (!response) {
@@ -57,22 +87,70 @@ function HeroSearch() {
     };
   }, [response]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (query.trim().length === 0) return;
-    setIsOpen(true);
+  // Focus follow-up input once response finishes animating
+  useEffect(() => {
+    if (!isLoading && isOpen && displayedResponse) {
+      followUpRef.current?.focus();
+    }
+  }, [isLoading, isOpen, displayedResponse]);
+
+  async function sendMessage(userContent: string, currentMessages: ChatMessage[]) {
+    const updatedMessages: ChatMessage[] = [
+      ...currentMessages,
+      { role: "user", content: userContent },
+    ];
+    const userCount = updatedMessages.filter((m) => m.role === "user").length;
+    const isLastMessage = userCount >= MAX_USER_MESSAGES;
+
     setIsLoading(true);
     setResponse("");
 
     try {
-      const result = await getAIResponse(query);
+      const mainResponse = await getAIResponse(updatedMessages);
+      const result = isLastMessage
+        ? `${mainResponse}\n\n${CLOSING_LINES[Math.floor(Math.random() * CLOSING_LINES.length)]}`
+        : mainResponse;
       setResponse(result);
+      const finalMessages: ChatMessage[] = [
+        ...updatedMessages,
+        { role: "assistant", content: result },
+      ];
+      setMessages(finalMessages);
+      saveMessages(finalMessages);
     } catch (error) {
       console.error("Error getting AI response:", error);
       setResponse("Sorry, I couldn't process your request. Please try again.");
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleClose() {
+    setIsOpen(false);
+    setMessages([]);
+    setQuery("");
+    setFollowUpInput("");
+    setResponse("");
+    setDisplayedResponse("");
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (query.trim().length === 0) return;
+    setIsOpen(true);
+    setFollowUpInput("");
+    await sendMessage(query.trim(), messages);
+  };
+
+  const handleFollowUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const text = followUpInput.trim();
+    if (!text || isLoading) return;
+    setQuery(text);
+    setFollowUpInput("");
+    await sendMessage(text, messages);
   };
 
   return (
@@ -111,15 +189,22 @@ function HeroSearch() {
         </Button>
       </motion.div>
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={isOpen} onOpenChange={(open) => { if (!open) handleClose(); }}>
         <DialogContent className="sm:max-w-lg max-h-[90svh] flex flex-col gap-0 p-0 overflow-hidden">
           {/* Header */}
           <div className="border-b border-border px-6 py-4 shrink-0">
             <DialogHeader>
               <DialogTitle asChild>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-semibold bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
-                  <Sparkles className="size-4 fill-current text-pink-400" />
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl font-semibold bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
+                    <Sparkles className="size-4 fill-current text-pink-400" />
+                  </div>
+                  {messages.length > 0 && (
+                    <span className="text-xs text-muted-foreground tabular-nums">
+                      {messages.filter((m) => m.role === "user").length}/{MAX_USER_MESSAGES} messages
+                    </span>
+                  )}
                 </div>
               </DialogTitle>
             </DialogHeader>
@@ -130,7 +215,7 @@ function HeroSearch() {
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               You asked
             </p>
-            <p className="text-base font-semibold text-foreground text-wrap break-words ">{query}</p>
+            <p className="text-base font-semibold text-foreground text-wrap break-words">{query}</p>
             <div className="border-t border-border" />
             {isLoading ? (
               <div className="flex flex-col gap-2 pt-1">
@@ -175,13 +260,41 @@ function HeroSearch() {
 
           {/* Footer */}
           <DialogFooter className="px-6 py-4 border-t border-border shrink-0">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsOpen(false)}
-            >
-              Close
-            </Button>
+            <form onSubmit={handleFollowUp} className="flex items-center gap-2 w-full">
+              {(() => {
+                const limitReached = messages.filter((m) => m.role === "user").length >= MAX_USER_MESSAGES;
+                return (
+                  <>
+                    <input
+                      ref={followUpRef}
+                      type="text"
+                      maxLength={100}
+                      placeholder={limitReached ? "Message limit reached" : "Reply..."}
+                      className="flex-1 bg-muted rounded-md px-3 py-1.5 text-sm outline-none border border-transparent focus:border-border transition-colors placeholder:text-muted-foreground disabled:opacity-50"
+                      value={followUpInput}
+                      onChange={(e) => setFollowUpInput(e.target.value)}
+                      disabled={isLoading || limitReached}
+                    />
+                    <Button
+                      type="submit"
+                      size="icon"
+                      variant={followUpInput.trim().length > 0 ? "default" : "ghost"}
+                      disabled={isLoading || followUpInput.trim().length === 0 || limitReached}
+                    >
+                      <Send className="size-4" />
+                    </Button>
+                  </>
+                );
+              })()}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+            </form>
           </DialogFooter>
         </DialogContent>
       </Dialog>
