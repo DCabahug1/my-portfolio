@@ -14,9 +14,10 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { getAIResponse, type ChatMessage } from "@/lib/ai-response";
+import { Badge } from "@/components/ui/badge";
 
 const STORAGE_KEY = "duaneai_messages";
-const MAX_USER_MESSAGES = 2;
+const MAX_USER_MESSAGES = 20;
 
 const CLOSING_LINES = [
   "That's my context window tapped out — glad we got to chat though.",
@@ -25,7 +26,6 @@ const CLOSING_LINES = [
   "Context limit reached. I'd remember more, but RAM is expensive.",
   "That's a wrap from me — context has its limits, and we just hit one.",
 ];
-
 
 const exampleQueries = [
   "Tell me about your latest project...",
@@ -94,7 +94,10 @@ function HeroSearch() {
     }
   }, [isLoading, isOpen, displayedResponse]);
 
-  async function sendMessage(userContent: string, currentMessages: ChatMessage[]) {
+  async function sendMessage(
+    userContent: string,
+    currentMessages: ChatMessage[],
+  ) {
     const updatedMessages: ChatMessage[] = [
       ...currentMessages,
       { role: "user", content: userContent },
@@ -173,8 +176,12 @@ function HeroSearch() {
           />
           {!query && (
             <span className="pointer-events-none absolute inset-0 flex items-center gap-1 text-muted-foreground text-sm text-nowrap overflow-hidden">
-              Ask <span className="bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
-              <Sparkles className="size-3 fill-current text-pink-400 min-w-3 min-h-3" />:&nbsp;
+              Ask{" "}
+              <span className="bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">
+                DuaneAI
+              </span>
+              <Sparkles className="size-3 fill-current text-pink-400 min-w-3 min-h-3" />
+              :&nbsp;
               <TypeAnimation
                 sequence={exampleQueries.flatMap((q) => [q, 2000])}
                 repeat={Infinity}
@@ -184,27 +191,47 @@ function HeroSearch() {
             </span>
           )}
         </div>
-        <Button type="submit" variant={query.trim().length > 0 ? "default" : "ghost"} size="icon">
-          <ArrowRight className={query.trim().length > 0 ? "text-primary-foreground" : "text-muted-foreground"} />
+        <Button
+          type="submit"
+          variant={query.trim().length > 0 ? "default" : "ghost"}
+          size="icon"
+        >
+          <ArrowRight
+            className={
+              query.trim().length > 0
+                ? "text-primary-foreground"
+                : "text-muted-foreground"
+            }
+          />
         </Button>
       </motion.div>
 
-      <Dialog open={isOpen} onOpenChange={(open) => { if (!open) handleClose(); }}>
-        <DialogContent className="sm:max-w-lg max-h-[90svh] flex flex-col gap-0 p-0 overflow-hidden">
+      <Dialog
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) handleClose();
+        }}
+      >
+        <DialogContent
+          className="sm:max-w-lg max-h-[90svh] flex flex-col gap-0 p-0 overflow-hidden"
+          onInteractOutside={(e) => e.preventDefault()}
+        >
           {/* Header */}
           <div className="border-b border-border px-6 py-4 shrink-0">
             <DialogHeader>
               <DialogTitle asChild>
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-semibold bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">DuaneAI</span>
+                    <span className="text-2xl font-semibold bg-gradient-to-r from-primary to-pink-400 text-transparent bg-clip-text">
+                      DuaneAI
+                    </span>
                     <Sparkles className="size-4 fill-current text-pink-400" />
                   </div>
-                  {messages.length > 0 && (
-                    <span className="text-xs text-muted-foreground tabular-nums">
-                      {messages.filter((m) => m.role === "user").length}/{MAX_USER_MESSAGES} messages
-                    </span>
-                  )}
+
+                  <Badge variant="outline" className="text-muted-foreground">
+                    {messages.filter((m) => m.role === "user").length}/
+                    {MAX_USER_MESSAGES} messages
+                  </Badge>
                 </div>
               </DialogTitle>
             </DialogHeader>
@@ -213,9 +240,11 @@ function HeroSearch() {
           {/* Body */}
           <div className="flex-1 min-h-0 overflow-y-auto px-6 py-5 flex flex-col gap-3">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              You asked
+              You said
             </p>
-            <p className="text-base font-semibold text-foreground text-wrap break-words">{query}</p>
+            <p className="text-base font-semibold text-foreground text-wrap break-words">
+              {query}
+            </p>
             <div className="border-t border-border" />
             {isLoading ? (
               <div className="flex flex-col gap-2 pt-1">
@@ -242,9 +271,7 @@ function HeroSearch() {
                       {children}
                     </ol>
                   ),
-                  li: ({ children }) => (
-                    <li className="text-sm">{children}</li>
-                  ),
+                  li: ({ children }) => <li className="text-sm">{children}</li>,
                   strong: ({ children }) => (
                     <strong className="font-semibold text-foreground">
                       {children}
@@ -260,16 +287,23 @@ function HeroSearch() {
 
           {/* Footer */}
           <DialogFooter className="px-6 py-4 border-t border-border shrink-0">
-            <form onSubmit={handleFollowUp} className="flex items-center gap-2 w-full">
+            <form
+              onSubmit={handleFollowUp}
+              className="flex items-center gap-2 w-full"
+            >
               {(() => {
-                const limitReached = messages.filter((m) => m.role === "user").length >= MAX_USER_MESSAGES;
+                const limitReached =
+                  messages.filter((m) => m.role === "user").length >=
+                  MAX_USER_MESSAGES;
                 return (
                   <>
                     <input
                       ref={followUpRef}
                       type="text"
                       maxLength={100}
-                      placeholder={limitReached ? "Message limit reached" : "Reply..."}
+                      placeholder={
+                        limitReached ? "Message limit reached" : "Reply..."
+                      }
                       className="flex-1 bg-muted rounded-md px-3 py-1.5 text-sm outline-none border border-transparent focus:border-border transition-colors placeholder:text-muted-foreground disabled:opacity-50"
                       value={followUpInput}
                       onChange={(e) => setFollowUpInput(e.target.value)}
@@ -278,22 +312,20 @@ function HeroSearch() {
                     <Button
                       type="submit"
                       size="icon"
-                      variant={followUpInput.trim().length > 0 ? "default" : "ghost"}
-                      disabled={isLoading || followUpInput.trim().length === 0 || limitReached}
+                      variant={
+                        followUpInput.trim().length > 0 ? "default" : "ghost"
+                      }
+                      disabled={
+                        isLoading ||
+                        followUpInput.trim().length === 0 ||
+                        limitReached
+                      }
                     >
                       <Send className="size-4" />
                     </Button>
                   </>
                 );
               })()}
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleClose}
-              >
-                Close
-              </Button>
             </form>
           </DialogFooter>
         </DialogContent>
