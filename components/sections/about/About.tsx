@@ -35,29 +35,25 @@ function About() {
         viewport={{ once: true, amount: 0.3 }}
         custom={0.15}
       >
-        I am a{" "}
-        <span className="text-primary">Computer Science</span>{" "}
-        major at{" "}
+        I am a <span className="text-primary">Computer Science</span> major at{" "}
         <span className="text-primary">
           California State University, Northridge
         </span>{" "}
-        pursuing a minor in{" "}
-        <span className="text-primary">Data Science</span>.
+        pursuing a minor in <span className="text-primary">Data Science</span>.
         I focus on building{" "}
-        <span className="text-primary">full-stack applications</span>{" "}
-        that combine modern web technologies with{" "}
-        <span className="text-primary">AI systems</span>.
-        My work often centers on creating practical tools such as{" "}
-        <span className="text-primary">AI learning platforms</span>
-        , accessibility software, and scalable web applications. I enjoy leading{" "}
-        <span className="text-primary">technical teams</span>
-        , designing{" "}
-        <span className="text-primary">system architecture</span>
-        , and turning ideas into working products through rapid prototyping and{" "}
-        <span className="text-primary">hackathons</span>.
-        My goal is to continue developing software that solves meaningful
-        problems while growing as an engineer in{" "}
-        <span className="text-primary">AI</span> and large-scale systems.
+        <span className="text-primary">full-stack applications</span> that
+        combine modern web technologies with{" "}
+        <span className="text-primary">AI systems</span>. My work often centers
+        on creating practical tools such as{" "}
+        <span className="text-primary">AI learning platforms</span>,
+        accessibility software, and scalable web applications. I enjoy leading{" "}
+        <span className="text-primary">technical teams</span>, designing{" "}
+        <span className="text-primary">system architecture</span>, and turning
+        ideas into working products through rapid prototyping and{" "}
+        <span className="text-primary">hackathons</span>. My goal is to continue
+        developing software that solves meaningful problems while growing as an
+        engineer in <span className="text-primary">AI</span> and large-scale
+        systems.
       </motion.p>
       <motion.div
         className="flex flex-wrap justify-center sm:justify-start gap-2"
