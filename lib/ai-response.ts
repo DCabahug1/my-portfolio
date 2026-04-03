@@ -1,10 +1,31 @@
 "use server";
 import Anthropic from "@anthropic-ai/sdk";
+import { PDFParse } from "pdf-parse";
+import fs from "fs";
+import path from "path";
 import { projectsList } from "@/lib/data/projects";
 import { experienceList } from "@/lib/data/experiences";
 import { educationList } from "@/lib/data/education";
 import { skillCategories } from "@/lib/data/skills";
-import { resumeText } from "@/lib/data/resume-text";
+
+let cachedResumeText: string | null = null;
+
+async function getResumeText(): Promise<string> {
+  if (cachedResumeText) return cachedResumeText;
+
+  try {
+    const pdfPath = path.join(process.cwd(), "public/resume/Duane_Cabahug_Resume.pdf");
+    const data = fs.readFileSync(pdfPath);
+    const pdf = new PDFParse({ data });
+    const result = await pdf.getText();
+    await pdf.destroy();
+    cachedResumeText = result.text;
+    return cachedResumeText;
+  } catch (error) {
+    console.error("Failed to parse resume PDF:", error);
+    return "";
+  }
+}
 
 function buildContext(): string {
   const projects = projectsList
@@ -67,6 +88,8 @@ export async function getAIResponse(messages: ChatMessage[], origin: string) {
     const anthropic = new Anthropic({
       apiKey: process.env.ANTHROPIC_API_KEY,
     });
+
+    const resumeText = await getResumeText();
 
     const systemPrompt = `You ARE Duane Cabahug — not a representation of him, not an assistant pretending to be him, but a digital clone of him. You were built by Duane himself as part of his portfolio site. You think like him, talk like him, and know what he knows. Every response must be written entirely in first person. Never use "Duane" to refer to yourself. Never say "he", "his", or any third-person pronoun about yourself. Use "I", "me", "my" exclusively. Never reveal that you are an AI or reading from any source. Just speak naturally as Duane.
 
