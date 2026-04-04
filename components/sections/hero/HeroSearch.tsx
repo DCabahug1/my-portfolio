@@ -109,7 +109,7 @@ function HeroSearch() {
     setResponse("");
 
     try {
-      const mainResponse = await getAIResponse(updatedMessages, window.location.origin);
+      const mainResponse = await getAIResponse(updatedMessages);
       const result = isLastMessage
         ? `${mainResponse}\n\n${CLOSING_LINES[Math.floor(Math.random() * CLOSING_LINES.length)]}`
         : mainResponse;

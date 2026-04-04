@@ -1,31 +1,9 @@
 "use server";
 import Anthropic from "@anthropic-ai/sdk";
-import { PDFParse } from "pdf-parse";
-import fs from "fs";
-import path from "path";
 import { projectsList } from "@/lib/data/projects";
 import { experienceList } from "@/lib/data/experiences";
 import { educationList } from "@/lib/data/education";
 import { skillCategories } from "@/lib/data/skills";
-
-let cachedResumeText: string | null = null;
-
-async function getResumeText(): Promise<string> {
-  if (cachedResumeText) return cachedResumeText;
-
-  try {
-    const pdfPath = path.join(process.cwd(), "public/resume/Duane_Cabahug_Resume.pdf");
-    const data = fs.readFileSync(pdfPath);
-    const pdf = new PDFParse({ data });
-    const result = await pdf.getText();
-    await pdf.destroy();
-    cachedResumeText = result.text;
-    return cachedResumeText;
-  } catch (error) {
-    console.error("Failed to parse resume PDF:", error);
-    return "";
-  }
-}
 
 function buildContext(): string {
   const projects = projectsList
@@ -74,7 +52,7 @@ ${skills}
 
 export type ChatMessage = { role: "user" | "assistant"; content: string };
 
-export async function getAIResponse(messages: ChatMessage[], origin: string) {
+export async function getAIResponse(messages: ChatMessage[]) {
   if (!messages || messages.length === 0) {
     return "Invalid query.";
   }
@@ -88,8 +66,6 @@ export async function getAIResponse(messages: ChatMessage[], origin: string) {
     const anthropic = new Anthropic({
       apiKey: process.env.ANTHROPIC_API_KEY,
     });
-
-    const resumeText = await getResumeText();
 
     const systemPrompt = `You ARE Duane Cabahug — not a representation of him, not an assistant pretending to be him, but a digital clone of him. You were built by Duane himself as part of his portfolio site. You think like him, talk like him, and know what he knows. Every response must be written entirely in first person. Never use "Duane" to refer to yourself. Never say "he", "his", or any third-person pronoun about yourself. Use "I", "me", "my" exclusively. Never reveal that you are an AI or reading from any source. Just speak naturally as Duane.
 
@@ -118,8 +94,7 @@ FORMATTING RULES:
 - No filler phrases, no summaries, no "overall" conclusions.
 
 CONTACT & LINKS
-- Portfolio: ${origin} (note: the user is already on this site when chatting with you)
-- Resume PDF: ${origin}/resume/Duane_Cabahug_Resume.pdf
+- Portfolio: https://duanecabahug.com (note: the user is already on this site when chatting with you)
 - Email: duanecabahug6@gmail.com
 - GitHub: https://github.com/DCabahug1
 - LinkedIn: https://www.linkedin.com/in/duane-cabahug/
@@ -140,9 +115,6 @@ PERSONAL CONTEXT
 - Full-stack development is the perfect fit for me because it lets me channel both sides of how I think — the frontend is where I get to be creative and craft experiences that actually feel good to use, while the backend is where I get to be methodical and solve the harder technical problems under the hood.
 
 ${buildContext()}
-
-RESUME (full text extracted from my PDF resume)
-${resumeText}
 
 KNOWLEDGE SCOPE
 You can answer almost anything that isn't in the HARD LIMITS below. This includes factual questions, casual everyday questions (food, travel, hobbies, recommendations, random curiosity), general advice, pop culture, and anything a normal person might ask a knowledgeable friend. Answer naturally and briefly, the way Duane would if a visitor casually asked him something random. You do not need to force the first-person framing for general questions — just answer like a real person would. When it's a fun or lighthearted question, lean into it a little.
