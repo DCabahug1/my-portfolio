@@ -19,6 +19,25 @@ interface Project {
 // Projects
 export const projectsList: Project[] = [
   {
+    title: "RPI Security Camera",
+    imgURL: "/images/RPI_Cam.avif",
+    description:
+      "YOLOv8 person detection on a Raspberry Pi: record clips on trigger, FFmpeg encode, upload to Supabase Storage with Postgres metadata.",
+    impacts: [
+      "End-to-end OpenCV + YOLOv8 pipeline on Raspberry Pi with clip capture on high-confidence detections",
+      "FFmpeg H.264 + faststart for browser-playable uploads to Supabase Storage",
+      "Pairs with a Next.js dashboard repo for realtime playback and listings",
+    ],
+    tags: [
+      { title: "Python", priority: "high", ...getBadgeStyling("Python") },
+      { title: "YOLOv8", priority: "high", ...getBadgeStyling("APIs") },
+      { title: "OpenCV", priority: "high", ...getBadgeStyling("APIs") },
+      { title: "Supabase", priority: "medium", ...getBadgeStyling("Supabase") },
+    ],
+    demo_link: "",
+    repo_link: "https://github.com/DCabahug1/rpi-security-camera",
+  },
+  {
     title: "ASLingo",
     imgURL: "/images/ASLingo.jpg",
     description: "AI-powered American Sign Language learning platform.",

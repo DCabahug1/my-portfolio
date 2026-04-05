@@ -40,6 +40,8 @@ export function getBadgeStyling(name: string): BadgeStyle {
       return { background: "#0284C7", foreground: "#FFFFFF", icon: "API" };
     case "OpenAI":
       return { background: "#000000", foreground: "#FFFFFF", icon: "OpenAI" };
+    case "Python":
+      return { background: "#3776AB", foreground: "#FFFFFF", icon: "Python" };
     default:
       return { background: "#6B7280", foreground: "#FFFFFF", icon: "" };
   }

@@ -51,10 +51,14 @@ function Projects() {
             </DialogTrigger>
             <DialogContent>
               <DialogTitle>{project.title}</DialogTitle>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className={`grid grid-cols-1 ${project.demo_link ? "sm:grid-cols-2" : "sm:grid-cols-1"} gap-2`}>
                 {project.repo_link ? (
                   <Button variant="default" className="" asChild>
-                    <Link href={project.repo_link} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={project.repo_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       View Repository
                       <Github className="size-4" />
                     </Link>
@@ -65,17 +69,16 @@ function Projects() {
                     <Github className="size-4" />
                   </Button>
                 )}
-                {project.demo_link ? (
+                {project.demo_link && (
                   <Button variant="outline" className="" asChild>
-                    <Link href={project.demo_link} target="_blank" rel="noopener noreferrer">
+                    <Link
+                      href={project.demo_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Live Demo
                       <ExternalLink className="size-4" />
                     </Link>
-                  </Button>
-                ) : (
-                  <Button type="button" variant="outline" className="" disabled>
-                    Live Demo
-                    <ExternalLink className="size-4" />
                   </Button>
                 )}
               </div>

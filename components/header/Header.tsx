@@ -16,7 +16,7 @@ function Header() {
     <div className="sticky top-0 z-50 flex items-center justify-center w-full bg-background border-b border-border p-4">
       <div className="flex items-center justify-between w-full max-w-7xl">
         {/* Branding */}
-        <Link href="/">
+        <Link href="/#hero">
           <Image
             src="/images/Logo.png"
             alt="Logo"
